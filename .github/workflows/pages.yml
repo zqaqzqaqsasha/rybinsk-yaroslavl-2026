@@ -1,0 +1,42 @@
+name: Publish trip and refresh weather
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.event_name != 'schedule' || github.repository == 'zqaqzqaqsasha/rybinsk-yaroslavl-2026'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test scripts/test.mjs
+      - run: node scripts/update-weather.mjs
+      - uses: actions/configure-pages@v5
+      - name: Assemble static site
+        run: |
+          mkdir -p _site/data _site/assets _site/docs
+          cp index.html style.css core.js app.js venue-cards.css venue-cards.js trip-nav.css trip-nav.js sw.js manifest.webmanifest route.md _site/
+          cp data/*.json _site/data/
+          cp assets/* _site/assets/
+          cp docs/*.md _site/docs/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
