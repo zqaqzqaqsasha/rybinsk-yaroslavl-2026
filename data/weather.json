@@ -1,0 +1,35 @@
+{
+  "source": "Open-Meteo",
+  "sourceURL": "https://open-meteo.com/",
+  "license": "CC BY 4.0",
+  "timezone": "Europe/Moscow",
+  "generatedAt": "2026-09-12T18:34:47.554Z",
+  "days": [
+    {
+      "city": "Рыбинск",
+      "date": "2026-09-13",
+      "latitude": 58.05,
+      "longitude": 38.85,
+      "min": 8.6,
+      "max": 15.7,
+      "rainProbability": 13,
+      "code": 3,
+      "summary": "Облачно",
+      "sunrise": "2026-09-13T05:49",
+      "sunset": "2026-09-13T18:49"
+    },
+    {
+      "city": "Ярославль",
+      "date": "2026-09-14",
+      "latitude": 57.63,
+      "longitude": 39.88,
+      "min": 8.5,
+      "max": 18.2,
+      "rainProbability": 8,
+      "code": 3,
+      "summary": "Облачно",
+      "sunrise": "2026-09-14T05:48",
+      "sunset": "2026-09-14T18:42"
+    }
+  ]
+}
