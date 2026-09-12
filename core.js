@@ -1,6 +1,6 @@
 export const ZONE='Europe/Moscow';
 export function escapeHTML(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-export function resolvedEvents(day,rain=false){return day.events.map((e,i)=>({...e,...(rain?e.rain:{}),id:`${day.date}-${i}`,date:day.date}));}
+export function resolvedEvents(day){return day.events.map((e,i)=>({...e,id:`${day.date}-${i}`,date:day.date}));}
 export function bounds(e){const start=Date.parse(`${e.date}T${e.start}:00+03:00`);let end=Date.parse(`${e.date}T${e.end}:00+03:00`);if(end<=start)end+=86400000;return {start,end};}
 export function findCurrent(events,now=Date.now()){return events.find(e=>bounds(e).start<=now&&now<bounds(e).end);}
 export function findNext(events,now=Date.now()){return events.find(e=>bounds(e).start>now);}

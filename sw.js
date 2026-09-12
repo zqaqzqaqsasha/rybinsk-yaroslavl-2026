@@ -1,4 +1,4 @@
-const PREFIX='ry-2026-',CACHE=PREFIX+'v3';
+const PREFIX='ry-2026-',CACHE=PREFIX+'v4';
 const APP_SHELL=['./','./index.html','./style.css','./core.js','./app.js','./venue-cards.css','./venue-cards.js','./trip-nav.css','./trip-nav.js','./data/trip.json','./data/weather.json','./assets/icon.svg','./manifest.webmanifest','./route.md','./docs/verification.md'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP_SHELL.map(path=>new Request(new URL(path,self.registration.scope),{cache:"reload"})))).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
